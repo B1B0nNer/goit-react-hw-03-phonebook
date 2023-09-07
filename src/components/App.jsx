@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ContactForm from './ContactForm';
 import ContactList from './ContactList';
 import Filter from './Filter';
@@ -7,6 +7,18 @@ const shortid = require('shortid');
 export const App = () => {
   const [contacts, setContacts] = useState([]);
   const [filter, setFilter] = useState('');
+
+  useEffect(() => {
+    setContacts(
+      localStorage.getItem('contacts')
+        ? JSON.parse(localStorage.getItem('contacts'))
+        : []
+    );
+  }, []);
+  
+  useEffect(() => {
+    localStorage.setItem('contacts', JSON.stringify(contacts));
+  }, [contacts]);
 
   const addContact = (name, number) => {
     const isNameInList = contacts.find(
