@@ -5,13 +5,10 @@ import Filter from './Filter';
 const shortid = require('shortid');
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      contacts: [],
-      filter: '',
-    };
-  }
+  state = {
+    contacts: [],
+    filter: '',
+  };
 
   componentDidMount() {
     const savedContacts = localStorage.getItem('contacts');
